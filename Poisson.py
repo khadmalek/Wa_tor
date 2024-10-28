@@ -11,6 +11,7 @@ class Poisson:
         self.temps_reproduction = 0  # Compteur de reproduction initialisé à 0
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
 
+
     def cases_voisines(self) -> list[tuple]:
 
         return [
@@ -61,6 +62,14 @@ class Poisson:
 
 
 # Autres fonctions
+
+def mouvement_thoroidal(coord, longueur) : 
+    if coord == longueur : 
+        return 0
+    elif coord == -1 : 
+        return longueur-1
+    # return coord % longueur
+
 
 def mouvement_thoroidal(coord, longueur) : 
     if coord == longueur : 
