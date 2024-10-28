@@ -22,74 +22,84 @@ class Poisson:
         self.emplacement_x = x  # Position x du poisson dans la grille
         self.emplacement_y = y  # Position y du poisson dans la grille
         self.temps_reproduction_poisson = temps_reproduction_poisson  # Temps requis pour la reproduction
+        self.temps_reproduction = 0  # Compteur de reproduction initialisé à 0
 
-        self.age_reproduction = 0
+    def voisins_libres(self, grille, largeur, hauteur):
+        """
+        Trouve les cases adjacentes libres autour du poisson dans la grille.
 
+        :param grille: Liste de listes représentant la grille.
+        :param largeur: Largeur de la grille.
+        :param hauteur: Hauteur de la grille.
+        :return: Liste de tuples (x, y) des positions libres adjacentes.
+        """
         voisins_libres = []
+        x, y = self.emplacement_x, self.emplacement_y
 
         # Vérifie chaque direction autour de la position (x, y) sans sortir de la grille
-        if x > 0 and self.grille[y][x - 1] is None:  # Gauche
+        if x > 0 and grille[y][x - 1] is None:  # Gauche
             voisins_libres.append((x - 1, y))
-        if x < self.largeur - 1 and self.grille[y][x + 1] is None:  # Droite
+        if x < largeur - 1 and grille[y][x + 1] is None:  # Droite
             voisins_libres.append((x + 1, y))
-        if y > 0 and self.grille[y - 1][x] is None:  # Haut
+        if y > 0 and grille[y - 1][x] is None:  # Haut
             voisins_libres.append((x, y - 1))
-        if y < self.hauteur - 1 and self.grille[y + 1][x] is None:  # Bas
+        if y < hauteur - 1 and grille[y + 1][x] is None:  # Bas
             voisins_libres.append((x, y + 1))
 
-        # Retourne la liste des positions libres adjacentes
         return voisins_libres
 
-
-    def deplacement(self):
+    def deplacement(self, grille, largeur, hauteur):
         """
         Déplace le poisson vers une case libre adjacente si disponible.
 
-        :param planete: Instance de la classe Planete pour accéder aux cases libres.
+        :param grille: Instance de la grille pour accéder aux cases libres.
+        :param largeur: Largeur de la grille.
+        :param hauteur: Hauteur de la grille.
         :return: Tuple (nouveau_x, nouveau_y) si le poisson a bougé, sinon None.
         """
-        # Obtenir les cases libres autour du poisson via la méthode voisins_libres de Planete
-        voisins_libres = voisins_libres(self.emplacement_x, self.emplacement_y)
+        # Obtenir les cases libres autour du poisson
+        voisins_libres = self.voisins_libres(grille, largeur, hauteur)
 
-        # Si des cases libres sont disponibles autour du poisson
         if voisins_libres:
             # Choisit une case libre au hasard parmi les voisins libres
             nouvelle_position = random.choice(voisins_libres)
             
-            # Met à jour les coordonnées du poisson
+            # Met à jour les coordonnées du poisson dans la grille
+            grille[self.emplacement_y][self.emplacement_x] = None  # Efface l'ancienne position
             self.emplacement_x, self.emplacement_y = nouvelle_position
+            grille[self.emplacement_y][self.emplacement_x] = self  # Place le poisson dans la nouvelle position
             
             # Incrémente le compteur de reproduction après le déplacement
             self.temps_reproduction += 1
             
-            # Retourne la nouvelle position pour d'éventuelles actions externes
             return nouvelle_position
-        
-        # Si aucune case libre, retourne None pour indiquer aucun déplacement
         return None
 
-
-    def reproduction(self, voisins_libres):
+    def reproduction(self, grille, largeur, hauteur):
         """
         Tente de créer un nouveau poisson dans une case adjacente si le cycle de reproduction est atteint.
 
-        :param voisins_libres: Liste des positions adjacentes libres sous forme de tuples (x, y).
+        :param grille: Liste de listes représentant la grille.
+        :param largeur: Largeur de la grille.
+        :param hauteur: Hauteur de la grille.
         :return: Un nouvel objet Poisson si la reproduction a lieu, sinon None.
         """
         # Vérifie si le compteur de reproduction a atteint le cycle requis
-        if self.age_reproduction >= self.temps_reproduction_poisson:
-            # Si des cases libres sont disponibles
+        if self.temps_reproduction >= self.temps_reproduction_poisson:
+            voisins_libres = self.voisins_libres(grille, largeur, hauteur)
+
             if voisins_libres:
                 # Choisit une case libre pour le nouveau poisson
                 nouvelle_position = random.choice(voisins_libres)
                 
-                # Réinitialise le compteur de reproduction après la reproduction
+                # Réinitialise le compteur de reproduction
                 self.temps_reproduction = 0
                 
-                # Retourne un nouvel objet Poisson dans la case libre choisie
-                return Poisson(nouvelle_position[0], nouvelle_position[1], self.temps_reproduction_poisson)
-        
-        # Si le poisson n'est pas prêt à se reproduire, retourne None
+                # Crée un nouveau poisson et le place dans la grille
+                nouveau_poisson = Poisson(nouvelle_position[0], nouvelle_position[1], self.temps_reproduction_poisson)
+                grille[nouvelle_position[1]][nouvelle_position[0]] = nouveau_poisson
+                
+                return nouveau_poisson
         return None
 
 
