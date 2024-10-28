@@ -1,4 +1,5 @@
 import random
+from Requin import Requin
 
 class Poisson:
     
@@ -8,88 +9,65 @@ class Poisson:
         self.emplacement_y = y  # Position y du poisson dans la grille
         self.temps_reproduction_poisson = temps_reproduction_poisson  # Temps requis pour la reproduction
         self.temps_reproduction = 0  # Compteur de reproduction initialisé à 0
+        self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
 
-    def voisins_libres(self, grille, largeur, hauteur):
-        """
-        Trouve les cases adjacentes libres autour du poisson dans la grille.
+    def cases_voisines(self):
 
-        :param grille: Liste de listes représentant la grille.
-        :param largeur: Largeur de la grille.
-        :param hauteur: Hauteur de la grille.
-        :return: Liste de tuples (x, y) des positions libres adjacentes.
-        """
-        voisins_libres = []
-        x, y = self.emplacement_x, self.emplacement_y
+        return [
+            (mouvement_thoroidal(self.emplacement_x+1), self.emplacement_y), 
+            (mouvement_thoroidal(self.emplacement_x-1), self.emplacement_y),
+            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y+1)), 
+            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y-1))
+        ]
 
-        # Vérifie chaque direction autour de la position (x, y) sans sortir de la grille
-        if x > 0 and grille[y][x - 1] is None:  # Gauche
-            voisins_libres.append((x - 1, y))
-        if x < largeur - 1 and grille[y][x + 1] is None:  # Droite
-            voisins_libres.append((x + 1, y))
-        if y > 0 and grille[y - 1][x] is None:  # Haut
-            voisins_libres.append((x, y - 1))
-        if y < hauteur - 1 and grille[y + 1][x] is None:  # Bas
-            voisins_libres.append((x, y + 1))
+    def deplacement(self):
 
-        return voisins_libres
-
-    def deplacement(self, grille, largeur, hauteur):
-        """
-        Déplace le poisson vers une case libre adjacente si disponible.
-
-        :param grille: Instance de la grille pour accéder aux cases libres.
-        :param largeur: Largeur de la grille.
-        :param hauteur: Hauteur de la grille.
-        :return: Tuple (nouveau_x, nouveau_y) si le poisson a bougé, sinon None.
-        """
+        # stocker l'ancien emplacement du poisson
+        self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
         # Obtenir les cases libres autour du poisson
-        voisins_libres = self.voisins_libres(grille, largeur, hauteur)
+        cases_voisines = self.cases_voisines()
 
-        if voisins_libres:
+        for _ in range(len(cases_voisines)) :
             # Choisit une case libre au hasard parmi les voisins libres
-            nouvelle_position = random.choice(voisins_libres)
-            
-            # Met à jour les coordonnées du poisson dans la grille
-            grille[self.emplacement_y][self.emplacement_x] = None  # Efface l'ancienne position
-            self.emplacement_x, self.emplacement_y = nouvelle_position
-            grille[self.emplacement_y][self.emplacement_x] = self  # Place le poisson dans la nouvelle position
-            
-            # Incrémente le compteur de reproduction après le déplacement
-            self.temps_reproduction += 1
-            
-            return nouvelle_position
-        return None
+            case_choisie = random.choice(cases_voisines)
+            if not isinstance(case_choisie, Requin) and not isinstance(case_choisie, Poisson):
+                self.emplacement_x, self.emplacement_y = case_choisie
+                break
+            else : 
+                cases_voisines.remove(case_choisie)
+        # Incrémente le compteur de reproduction après le déplacement
+        self.temps_reproduction += 1
+        
 
-    def reproduction(self, grille, largeur, hauteur):
-        """
-        Tente de créer un nouveau poisson dans une case adjacente si le cycle de reproduction est atteint.
+    def reproduction(self, liste_animaux : list["Poisson", "Requin"]):
 
-        :param grille: Liste de listes représentant la grille.
-        :param largeur: Largeur de la grille.
-        :param hauteur: Hauteur de la grille.
-        :return: Un nouvel objet Poisson si la reproduction a lieu, sinon None.
-        """
         # Vérifie si le compteur de reproduction a atteint le cycle requis
-        if self.temps_reproduction >= self.temps_reproduction_poisson:
-            voisins_libres = self.voisins_libres(grille, largeur, hauteur)
-
-            if voisins_libres:
-                # Choisit une case libre pour le nouveau poisson
-                nouvelle_position = random.choice(voisins_libres)
+        if self.temps_reproduction >= self.temps_reproduction_poisson and [self.emplacement_x, self.emplacement_y] != self.ancien_emplacement:
+            nouveau_x, nouveau_y = self.ancien_emplacement
+            
+            # Crée un nouveau poisson et le place dans la grille
+            nouveau_poisson = Poisson(nouveau_x, nouveau_y, self.temps_reproduction_poisson)
+            
+            # on ajoute le nouveau poisson à la liste d'animaux
+            liste_animaux.append(nouveau_poisson)
+            
+            # Réinitialise le compteur de reproduction
+            self.temps_reproduction = 0
                 
-                # Réinitialise le compteur de reproduction
-                self.temps_reproduction = 0
-                
-                # Crée un nouveau poisson et le place dans la grille
-                nouveau_poisson = Poisson(nouvelle_position[0], nouvelle_position[1], self.temps_reproduction_poisson)
-                grille[nouvelle_position[1]][nouvelle_position[0]] = nouveau_poisson
-                
-                return nouveau_poisson
-        return None
     
     def __str__(self):
 
         return " 🐟"
+
+
+# Autres fonctions
+
+def mouvement_thoroidal(coord, longueur) : 
+    if coord == longueur : 
+        return 0
+    elif coord == -1 : 
+        return longueur-1
+    # return coord % longueur
 
 
 
