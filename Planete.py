@@ -1,5 +1,5 @@
 from Poisson import Poisson
-# from Requin import Requin
+from Requin import Requin
 import itertools
 
 class Planete : 
