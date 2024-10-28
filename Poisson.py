@@ -1,24 +1,9 @@
 import random
 
 class Poisson:
-    """
-    Classe représentant un poisson dans une simulation d'écosystème.
-
-    Attributs :
-    - emplacement_x (int) : Coordonnée x du poisson dans la grille.
-    - emplacement_y (int) : Coordonnée y du poisson dans la grille.
-    - temps_reproduction (int) : Compteur qui suit le temps écoulé depuis la dernière reproduction.
-    - temps_reproduction_poisson (int) : Temps nécessaire pour que le poisson puisse se reproduire.
-    """
     
     def __init__(self, x, y, temps_reproduction_poisson):
-        """
-        Initialise un objet Poisson avec sa position et le cycle de reproduction requis.
 
-        :param x: Coordonnée x initiale du poisson.
-        :param y: Coordonnée y initiale du poisson.
-        :param temps_reproduction_poisson: Nombre de tours avant que le poisson puisse se reproduire.
-        """
         self.emplacement_x = x  # Position x du poisson dans la grille
         self.emplacement_y = y  # Position y du poisson dans la grille
         self.temps_reproduction_poisson = temps_reproduction_poisson  # Temps requis pour la reproduction
@@ -42,12 +27,7 @@ class Poisson:
 
 
     def deplacement(self):
-        """
-        Déplace le poisson vers une case libre adjacente si disponible.
 
-        :param planete: Instance de la classe Planete pour accéder aux cases libres.
-        :return: Tuple (nouveau_x, nouveau_y) si le poisson a bougé, sinon None.
-        """
         # Obtenir les cases libres autour du poisson via la méthode voisins_libres de Planete
         voisins_libres = voisins_libres(self.emplacement_x, self.emplacement_y)
 
@@ -70,12 +50,7 @@ class Poisson:
 
 
     def reproduction(self, voisins_libres):
-        """
-        Tente de créer un nouveau poisson dans une case adjacente si le cycle de reproduction est atteint.
 
-        :param voisins_libres: Liste des positions adjacentes libres sous forme de tuples (x, y).
-        :return: Un nouvel objet Poisson si la reproduction a lieu, sinon None.
-        """
         # Vérifie si le compteur de reproduction a atteint le cycle requis
         if self.age_reproduction >= self.temps_reproduction_poisson:
             # Si des cases libres sont disponibles
@@ -91,6 +66,10 @@ class Poisson:
         
         # Si le poisson n'est pas prêt à se reproduire, retourne None
         return None
+    
+    def __str__(self):
+
+        return "🐟"
 
 
 
