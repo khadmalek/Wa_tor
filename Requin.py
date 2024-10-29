@@ -3,7 +3,7 @@ import random
 
 class Requin(Poisson):
     def __init__(self, x : int, y : int, temps_reproduction_requin : int, energie : int):
-        super().__init__(x, y)
+        super().__init__(x, y, temps_reproduction_requin) 
         self.temps_reproduction_requin= temps_reproduction_requin
         self.energie = energie 
         self.chronons_reproduction =  0
