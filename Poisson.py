@@ -1,5 +1,4 @@
 import random
-# from Requin import Requin
 
 class Poisson:
     
@@ -32,7 +31,7 @@ class Poisson:
 
             # Vérifie si la case est libre (ni requin ni poisson)
             x, y = case_choisie
-            if not isinstance(case_choisie, Requin) and not isinstance(case_choisie, Poisson):
+            if not isinstance(case_choisie, "Requin") and not isinstance(case_choisie, Poisson):
                 # Déplace le poisson à la nouvelle position
                 self.emplacement_x, self.emplacement_y = case_choisie
                 break
