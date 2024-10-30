@@ -10,23 +10,23 @@ class Poisson:
         self.temps_reproduction = 0  
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]  # Dernière position avant déplacement
 
-    def cases_voisines(self, longueur, largeur) -> list[tuple]:
+    def cases_voisines(self, largeur, hauteur) -> list[tuple]:
        
         return [
-            (mouvement_thoroidal(self.emplacement_x + 1, longueur), self.emplacement_y), 
-            (mouvement_thoroidal(self.emplacement_x - 1, longueur), self.emplacement_y),
-            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y + 1, largeur)), 
-            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y - 1, largeur))
+            (mouvement_thoroidal(self.emplacement_x + 1, largeur), self.emplacement_y), 
+            (mouvement_thoroidal(self.emplacement_x - 1, largeur), self.emplacement_y),
+            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y + 1, hauteur)), 
+            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y - 1, hauteur))
         ]
 
-    def deplacement(self, liste_animaux : list["Poisson", "Requin"], longueur, largeur):
+    def deplacement(self, liste_animaux : list["Poisson", "Requin"], largeur, hauteur):
         
         # Stocke la position actuelle comme ancien emplacement pour l'utiliser dans la reproduction
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
-        cases_voisines = self.cases_voisines(longueur, largeur)
+        cases_voisines = self.cases_voisines(largeur, hauteur)
         coordonnes_animaux = []
         for animal in liste_animaux:
-            coordonnes_animaux.append[(animal.emplacement_x, animal.emplacement_y)]
+            coordonnes_animaux.append((animal.emplacement_x, animal.emplacement_y))
 
         for _ in range(len(cases_voisines)):
             case_choisie = random.choice(cases_voisines)
