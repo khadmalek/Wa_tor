@@ -1,4 +1,5 @@
-from Animaux import Poisson, Requin
+from Poisson import Poisson
+from Requin import Requin
 import itertools
 
 

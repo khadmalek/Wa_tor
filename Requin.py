@@ -28,7 +28,7 @@ class Requin(Poisson):
         energie (int): Le niveau d'énergie actuel du Requin.
         """
         # Appel du constructeur de la classe parente
-        super().__init__(x, y, temps_reproduction_requin) 
+        super().__init__(x, y, temps_reproduction_requin)
         self.temps_reproduction_requin = temps_reproduction_requin  # Temps nécessaire pour se reproduire
         self.energie = energie  # Énergie actuelle du requin
         self.chronons_reproduction = 0  # Compteur de temps de reproduction
@@ -115,26 +115,12 @@ class Requin(Poisson):
 
 
         
-    def reproduction_requin(self, liste_animaux: list):
-        """
-        Gère la reproduction du requin en fonction des conditions établies.
-
-        Cette méthode vérifie si le requin a atteint le nombre requis de chronons de reproduction et s'il a changé d'emplacement. Si ces conditions sont remplies, un nouveau requin est créé à l'ancienne position et ajouté à la liste des animaux, et le compteur de reproduction est réinitialisé.
-
-        Args:
-        liste_animaux (list): La liste des animaux présents dans l'environnement.
-        """
-        # Vérifie les conditions de reproduction
+    def reproduction_requin(self, liste_animaux: list["Poisson", "Requin"]):
         if self.chronons_reproduction >= self.temps_reproduction_requin and [self.emplacement_x, self.emplacement_y] != self.ancien_emplacement:
-            x_nouveau = self.ancien_emplacement[0]
-            y_nouveau = self.ancien_emplacement[1]
-            # Crée un nouveau requin et l'ajoute à la population
-            nouveau_requin = Requin(x_nouveau, y_nouveau, self.temps_reproduction_requin, self.energie)
-            liste_animaux.append(nouveau_requin)
-            # Réinitialise le compteur de reproduction
+            nouveau_x, nouveau_y = self.ancien_emplacement
+            liste_animaux.append(Requin(nouveau_x, nouveau_y, self.temps_reproduction, self.energie))
             self.chronons_reproduction = 0
-
-
+    
 
     def __str__(self):
         """

@@ -13,14 +13,14 @@ import configparser
 config = configparser.ConfigParser()
 config.read('parametre.ini')
 
-largeur = config['largeur']
-hauteur = config['hauteur']
-nombre_poisson_initial = config['nombre_poisson_initial']
-nombre_requin_initial = config['nombre_requin_initial']
-energie_initiale = config['energie_initiale']
-temps_de_reproduction_poisson = config['temps_de_reproduction_poisson']
-temps_de_reproduction_requin = ['temps_de_reproduction_requin']
-gain_energie_par_poisson = config['gain_energie_par_poisson']
+largeur = int(config["main"]['largeur'])
+hauteur = int(config["main"]['hauteur'])
+nombre_poisson_initial = int(config["main"]['nombre_poisson_initial'])
+nombre_requin_initial = int(config["main"]['nombre_requin_initial'])
+energie_initiale = int(config["main"]['energie_initiale'])
+temps_de_reproduction_poisson = int(config["main"]['temps_de_reproduction_poisson'])
+temps_de_reproduction_requin = int(config["main"]['temps_de_reproduction_requin'])
+gain_energie_par_poisson = int(config["main"]['gain_energie_par_poisson'])
 
 
 ####################################################################################
