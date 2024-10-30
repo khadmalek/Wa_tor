@@ -39,20 +39,27 @@ class Planete :
         
         
 
-# l1 = [Poisson(0,0,5), Poisson(0,1,5), Poisson(1,0,5), Poisson(1,1,5)]
-
-# planete1 = Planete(5,5)
-
-# planete1.affichage_grille(l1)
-
-
-# Autres méthodes
-
-def afficher_statistiques (list_entites : list["Poisson", "Requin"]) : 
+# affichage du nombre de poissons et de requins
+def afficher_chiffres(list_entites : list["Poisson", "Requin"]) : 
     
     nombre_poissons = len([e for e in list_entites if isinstance(e, Poisson) and not isinstance(e, Requin)])
     nombre_requins = len([e for e in list_entites if isinstance(e, Requin)])
     print(f"Nombre de poissons : {nombre_poissons} \nNombre de requins : {nombre_requins} ")
+
+
+
+def statistiques() : 
+    pass
+
+
+
+
+def afficher_statistiques (list_entites : list["Poisson", "Requin"]) : 
+  
+    nombre_poissons = len([e for e in list_entites if isinstance(e, Poisson) and not isinstance(e, Requin)])
+    nombre_requins = len([e for e in list_entites if isinstance(e, Requin)])
+    print(f"Nombre de poissons : {nombre_poissons} \nNombre de requins : {nombre_requins} ")
+
 
 
 
