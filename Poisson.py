@@ -1,5 +1,4 @@
 import random
-# from Requin import Requin
 
 class Poisson:
     
@@ -11,36 +10,33 @@ class Poisson:
         self.temps_reproduction = 0  
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]  # Dernière position avant déplacement
 
-    def cases_voisines(self, longueur):
+    def cases_voisines(self, longueur, largeur) -> list[tuple]:
        
         return [
             (mouvement_thoroidal(self.emplacement_x + 1, longueur), self.emplacement_y), 
             (mouvement_thoroidal(self.emplacement_x - 1, longueur), self.emplacement_y),
-            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y + 1, longueur)), 
-            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y - 1, longueur))
+            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y + 1, largeur)), 
+            (self.emplacement_x, mouvement_thoroidal(self.emplacement_y - 1, largeur))
         ]
 
-    def deplacement(self, longueur):
+    def deplacement(self, liste_animaux : list["Poisson", "Requin"], longueur, largeur):
         
-        # Stocke la position actuelle comme ancien emplacement
+        # Stocke la position actuelle comme ancien emplacement pour l'utiliser dans la reproduction
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
-
-        cases_voisines = self.cases_voisines(longueur)
+        cases_voisines = self.cases_voisines(longueur, largeur)
+        coordonnes_animaux = []
+        for animal in liste_animaux:
+            coordonnes_animaux.append[(animal.emplacement_x, animal.emplacement_y)]
 
         for _ in range(len(cases_voisines)):
             case_choisie = random.choice(cases_voisines)
-
-            # Vérifie si la case est libre (ni requin ni poisson)
-            x, y = case_choisie
-            if not isinstance(case_choisie, Requin) and not isinstance(case_choisie, Poisson):
-                # Déplace le poisson à la nouvelle position
-                self.emplacement_x, self.emplacement_y = case_choisie
+            if case_choisie not in coordonnes_animaux : 
+                self.emplacement_x = case_choisie[0]
+                self.emplacement_y = case_choisie[1]
                 break
-            else:
-                # Retire la case de la liste si elle n'est pas libre
+            else : 
                 cases_voisines.remove(case_choisie)
-
-        # Incrémente le compteur de reproduction après le déplacement
+                
         self.temps_reproduction += 1
 
     def reproduction(self, liste_animaux):
@@ -72,14 +68,3 @@ def mouvement_thoroidal(coord, longueur):
     elif coord == -1:  
         return longueur - 1
     return coord 
-
-
-
-
-
-
-
-
-
-
-
