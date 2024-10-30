@@ -13,6 +13,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read('parametre.ini')
 
+
 largeur = int(config["main"]['largeur'])
 hauteur = int(config["main"]['hauteur'])
 nombre_poisson_initial = int(config["main"]['nombre_poisson_initial'])
