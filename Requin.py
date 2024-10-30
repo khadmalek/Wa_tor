@@ -115,7 +115,7 @@ class Requin(Poisson):
 
 
         
-    def reproduction_requin(self, liste_animaux: list):
+    def reproduction_requin(self, liste_animaux: list["Poisson", "Requin"]):
         """
         Gère la reproduction du requin en fonction des conditions établies.
 
@@ -125,7 +125,7 @@ class Requin(Poisson):
         liste_animaux (list): La liste des animaux présents dans l'environnement.
         """
         # Vérifie les conditions de reproduction
-        if self.chronons_reproduction >= self.temps_reproduction_requin and [self.emplacement_x, self.emplacement_y] != self.ancien_emplacement:
+        if self.chronons_reproduction >= self.temps_reproduction_requin and [self.emplacement_x, self.emplacement_y] != self.ancien_emplacement :
             x_nouveau = self.ancien_emplacement[0]
             y_nouveau = self.ancien_emplacement[1]
             # Crée un nouveau requin et l'ajoute à la population
