@@ -35,9 +35,9 @@ class Requin(Poisson):
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]  # Enregistrement de l'ancien emplacement
 
     
-    def deplacement(self, liste_animaux: list, largeur: int, hauteur: int):
+    def deplacement(self, liste_animaux: list ["Requin", "Poisson"], largeur: int, hauteur: int):
         """
-        Déplace le requin dans l'environnement en fonction de la présence de poissons et d'autres requins.
+        Déplace le requin dans l'environnement en fonction de la "résence de poissons et d'autres requins.
 
         Cette méthode réduit l'énergie du requin à chaque déplacement et met à jour sa position en fonction de la présence de poissons adjacents. Si des poissons sont présents, le requin se déplace vers l'un d'eux et le mange ; sinon, il se déplace vers une case vide. Le compteur de reproduction est également incrémenté à chaque déplacement.
 
@@ -57,11 +57,10 @@ class Requin(Poisson):
 
         # Identification des poissons et requins adjacents
         for animal in liste_animaux: 
-            if (animal.emplacement_x, animal.emplacement_y) in voisins:
-                if isinstance(animal, Poisson) and not isinstance(animal, Requin): 
-                    poissons_adjacents.append(animal)
-                elif isinstance(animal, Requin): 
-                    requins_adjacents.append(animal)
+            if (animal.emplacement_x, animal.emplacement_y) in voisins and isinstance(animal, Poisson) and not isinstance(animal, Requin): 
+                poissons_adjacents.append(animal)
+            if (animal.emplacement_x, animal.emplacement_y) in voisins and isinstance(animal, Requin) and not isinstance(animal, Poisson):
+                requin_adjactents.append((animal.emplacement_x, animal.emplacement_y))
 
         # Déplacement vers un poisson si présent
         if poissons_adjacents:
@@ -85,7 +84,7 @@ class Requin(Poisson):
 
 
 
-    def manger_poisson(self, poisson: "Poisson", liste_animaux: list):
+    def manger_poisson(self, poisson: "Poisson", liste_animaux: list ["Requin", "Poisson"]):
         """
         Permet au requin de manger un poisson, augmentant ainsi son niveau d'énergie.
 
@@ -115,7 +114,7 @@ class Requin(Poisson):
 
 
         
-    def reproduction_requin(self, liste_animaux: list):
+    def reproduction_requin(self, liste_animaux: list["Requin", "Poisson"]):
         """
         Gère la reproduction du requin en fonction des conditions établies.
 
