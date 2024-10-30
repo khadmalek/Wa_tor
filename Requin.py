@@ -10,13 +10,13 @@ class Requin(Poisson):
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
     
     
-    def deplacement(self, liste_animaux : list ["Requin", "Poisson"]):
+    def deplacement(self, liste_animaux : list ["Requin", "Poisson"], largeur: int, hauteur: int):
         
         self.energie -=1
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
         
         # recherche des poissons adjacents
-        voisins = self.cases_voisines()
+        voisins = self.cases_voisines(largeur,hauteur)
         poissons_adjacents = []
         requin_adjactents= []
 
