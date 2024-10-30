@@ -28,7 +28,7 @@ class Requin(Poisson):
         energie (int): Le niveau d'énergie actuel du Requin.
         """
         # Appel du constructeur de la classe parente
-        super().__init__(x, y, temps_reproduction_requin) 
+        super().__init__(x, y, temps_reproduction_requin)
         self.temps_reproduction_requin = temps_reproduction_requin  # Temps nécessaire pour se reproduire
         self.energie = energie  # Énergie actuelle du requin
         self.chronons_reproduction = 0  # Compteur de temps de reproduction
@@ -113,7 +113,6 @@ class Requin(Poisson):
             liste_animaux.remove(self)
 
 
-        
     def reproduction_requin(self, liste_animaux: list["Requin", "Poisson"]):
         """
         Gère la reproduction du requin en fonction des conditions établies.
@@ -132,8 +131,7 @@ class Requin(Poisson):
             liste_animaux.append(nouveau_requin)
             # Réinitialise le compteur de reproduction
             self.chronons_reproduction = 0
-
-
+    
 
     def __str__(self):
         """
