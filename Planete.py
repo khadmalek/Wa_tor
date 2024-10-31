@@ -37,9 +37,10 @@ class Planete :
         
         
         # affichage de la grille
-        separateur = "-" + "-" * (self.__largeur * 4 + (self.__largeur - 1))
+        separateur = "--" + "-" * (self.__largeur * 4 + (self.__largeur - 1))
         print(separateur)
         for ligne in grille_a_afficher :
+            print("|", end="")
             for e in ligne : 
                 print(e, end="|")
             print()
@@ -57,6 +58,8 @@ def afficher_chiffres(list_entites : list["Poisson", "Requin"]) :
 
 
 def statistiques() : 
+    
+    
     pass
 
 
