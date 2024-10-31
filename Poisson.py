@@ -19,7 +19,7 @@ class Poisson:
             (self.emplacement_x, mouvement_thoroidal(self.emplacement_y - 1, hauteur))
         ]
 
-    def deplacement(self, liste_animaux : list["Poisson", "Requin"], largeur, hauteur):
+    def deplacement(self, liste_animaux : list["Poisson"], largeur, hauteur) -> None :
         
         # Stocke la position actuelle comme ancien emplacement pour l'utiliser dans la reproduction
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
@@ -39,7 +39,7 @@ class Poisson:
                 
         self.temps_reproduction += 1
 
-    def reproduction(self, liste_animaux):
+    def reproduction(self, liste_animaux : list["Poisson"]) -> bool :
         
         # Vérifie si le cycle de reproduction est atteint et si l'ancien emplacement est différent
         if self.temps_reproduction >= self.temps_reproduction_poisson and \
@@ -54,10 +54,13 @@ class Poisson:
             liste_animaux.append(nouveau_poisson)
             
             self.temps_reproduction = 0
+            return True
+        return False
+
 
     def __str__(self):
        
-        return " 🐟"
+        return " 🐟 "
 
 
 # autes Fonction

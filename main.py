@@ -6,6 +6,7 @@ from Planete import afficher_chiffres
 import os
 import time
 import configparser
+from Chronometre import Chronometre
 
 
 # Paramètres de la simulation
@@ -50,26 +51,41 @@ def creer_animaux(largeur : int, hauteur : int) -> list :
 # Création de la planète
 aqualand = Planete(largeur, hauteur)
 liste_animaux = creer_animaux(largeur, hauteur)
+chrono = Chronometre()
+chrono.demarrer()
 
 
 chronon = 0
 while True:
     if chronon % 10 == 0 :
+        
+        poissons_nes = 0
         for animal in liste_animaux :
             if isinstance(animal, Poisson) and not isinstance(animal, Requin):
                 animal.deplacement(liste_animaux,largeur, hauteur)
-                animal.reproduction(liste_animaux)
+                if animal.reproduction(liste_animaux) : 
+                    poissons_nes += 1
         
+        requin_nes = 0
+        requins_morts = 0
+        poissons_miam = 0
         for animal in liste_animaux:
             if isinstance(animal, Requin):
-                animal.deplacement(liste_animaux, largeur, hauteur)       # et manger poisson en meme temps
-                animal.reproduction_requin(liste_animaux)
-                animal.mourir(liste_animaux)
+                if animal.deplacement(liste_animaux, largeur, hauteur) :        # et manger poisson en meme temps
+                    poissons_miam += 1
+                if animal.reproduction_requin(liste_animaux) == True : 
+                    requin_nes += 1
+                if animal.mourir(liste_animaux) : 
+                    requins_morts += 1
         
         # Afficher la grille et les statistiques
         os.system("clear")
         aqualand.affichage_grille(liste_animaux)
+        print(chrono.afficher_temps())
         afficher_chiffres(liste_animaux)
+        print("-"*65)
+        print(f"nombre de requins nés : {requin_nes:<6} nombre de requins morts : {requins_morts}")
+        print(f"nombre de poissons nés : {poissons_nes:<5} nombre de poissons miamiamés : {poissons_miam}")
         time.sleep(0.3)
     
     chronon += 1

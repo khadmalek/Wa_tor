@@ -1,5 +1,6 @@
 from Poisson import Poisson
 import random
+import configparser
 
 class Requin(Poisson):
     """
@@ -35,7 +36,7 @@ class Requin(Poisson):
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]  # Enregistrement de l'ancien emplacement
 
     
-    def deplacement(self, liste_animaux: list ["Requin", "Poisson"], largeur: int, hauteur: int):
+    def deplacement(self, liste_animaux: list ["Requin", "Poisson"], largeur: int, hauteur: int) -> bool :
         """
         Déplace le requin dans l'environnement en fonction de la "résence de poissons et d'autres requins.
 
@@ -48,6 +49,8 @@ class Requin(Poisson):
         """
         # Réduit l'énergie à chaque déplacement
         self.energie -= 1
+        # Incrémenter le nombre de chronons de reproduction à chaque déplacement
+        self.chronons_reproduction += 1
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]
         
         # Recherche des poissons adjacents
@@ -60,15 +63,15 @@ class Requin(Poisson):
             if (animal.emplacement_x, animal.emplacement_y) in voisins and isinstance(animal, Poisson) and not isinstance(animal, Requin): 
                 poissons_adjacents.append(animal)
             if (animal.emplacement_x, animal.emplacement_y) in voisins and isinstance(animal, Requin) and not isinstance(animal, Poisson):
-                requin_adjactents.append((animal.emplacement_x, animal.emplacement_y))
-
+                requins_adjacents.append((animal.emplacement_x, animal.emplacement_y))
         # Déplacement vers un poisson si présent
         if poissons_adjacents:
             poisson_a_miam = random.choice(poissons_adjacents)
             # Met à jour les coordonnées du requin dans la grille
             self.emplacement_x, self.emplacement_y = poisson_a_miam.emplacement_x, poisson_a_miam.emplacement_y
             # Manger le poisson
-            self.manger_poisson(poisson_a_miam, liste_animaux)
+            return self.manger_poisson(poisson_a_miam, liste_animaux)
+                
 
         # Déplacement vers une case vide sinon
         else: 
@@ -78,13 +81,10 @@ class Requin(Poisson):
                     cases_vides.append(voisin)
             case_vide = random.choice(cases_vides)
             self.emplacement_x, self.emplacement_y = case_vide
+            return False
         
-        # Incrémenter le nombre de chronons de reproduction à chaque déplacement
-        self.chronons_reproduction += 1
 
-
-
-    def manger_poisson(self, poisson: "Poisson", liste_animaux: list ["Requin", "Poisson"]):
+    def manger_poisson(self, poisson: "Poisson", liste_animaux: list ["Requin", "Poisson"]) -> bool :
         """
         Permet au requin de manger un poisson, augmentant ainsi son niveau d'énergie.
 
@@ -94,12 +94,16 @@ class Requin(Poisson):
         poisson (Poisson): L'objet poisson que le requin va manger.
         liste_animaux (list): La liste des animaux présents dans l'environnement.
         """
+        config = configparser.ConfigParser()
+        config.read("parametre.ini")
         # Augmente l'énergie en mangeant un poisson
-        self.energie += 1
+        energie_gagnee = int(config["main"]["gain_energie_par_poisson"])
+        self.energie += energie_gagnee
         liste_animaux.remove(poisson)  # Retire le poisson de la liste des animaux
+        return True
 
 
-    def mourir(self, liste_animaux: list):
+    def mourir(self, liste_animaux: list) -> bool :
         """
         Supprime le requin de la liste des animaux s'il n'a plus d'énergie.
 
@@ -111,9 +115,11 @@ class Requin(Poisson):
         # Supprime le requin de la liste s'il n'a plus d'énergie
         if self.energie <= 0:
             liste_animaux.remove(self)
+            return True
+        return False
 
 
-    def reproduction_requin(self, liste_animaux: list["Requin", "Poisson"]):
+    def reproduction_requin(self, liste_animaux: list["Requin", "Poisson"]) -> bool :
         """
         Gère la reproduction du requin en fonction des conditions établies.
 
@@ -131,7 +137,9 @@ class Requin(Poisson):
             liste_animaux.append(nouveau_requin)
             # Réinitialise le compteur de reproduction
             self.chronons_reproduction = 0
-    
+            return True
+        return False
+
 
     def __str__(self):
         """
@@ -142,7 +150,7 @@ class Requin(Poisson):
         Returns:
         str: Une chaîne de caractères contenant l'emoji du requin.
         """
-        return " 🦈"  # Représentation textuelle du requin
+        return " 🦈 "  # Représentation textuelle du requin
 
 
 if __name__ == "__main__": 
