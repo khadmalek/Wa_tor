@@ -1,4 +1,5 @@
 import time
+
 """Module Chronometre.
 
 Ce module utilise la bibliothèque `time` pour fournir des fonctionnalités de chronométrage. 
