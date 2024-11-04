@@ -1,53 +1,32 @@
 import pygame
-from pygame.locals import *
-import sys
-
-########################################################################################################
-
-# couleurs : 
-blanc = 255,255,255
-bleu = 0, 200, 255      # eau
-
-# initialiser pygame  :
 pygame.init()
 
-# créer la fenetre :
-largeur = 800
-hauteur = 600
-largeur_ligne = 3           # largeur de la ligne qui separe les cases de la grille 
+# Initialise screen
+pygame.init()
+screen = pygame.display.set_mode((600, 480))
+pygame.display.set_caption('Basic Pygame program')
 
-fenetre = pygame.display.set_mode((largeur, hauteur))       # créer la fenetre
-fenetre.fill(bleu)
-pygame.display.set_caption("WA_TOR")                        # afficher le titre "WA_TOR"
+# Fill background
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((250, 250, 250))
 
-def dessiner_grille() :
+# Display some text
+font = pygame.font.Font(None, 36)
+text = font.render("Hello There", 1, (10, 10, 10))
+textpos = text.get_rect()
+textpos.centerx = background.get_rect().centerx
+background.blit(text, textpos)
 
-    blockSize = 10
-    for x in range(0, largeur, blockSize):
-        for y in range(0, hauteur, blockSize):
-            rect = pygame.Rect(x, y, blockSize, blockSize)
-            pygame.draw.rect(fenetre, blanc, rect, 1)
-            
+# Blit everything to the screen
+screen.blit(background, (0, 0))
+pygame.display.flip()
 
-while True :
-    dessiner_grille()
+# Event loop
+continuer = 1
+while continuer:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-    pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if event.type == quito:
+            continuer = 0
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
