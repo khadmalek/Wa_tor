@@ -46,9 +46,6 @@ temps_de_reproduction_requin = int(config["main"]['temps_de_reproduction_requin'
 gain_energie_par_poisson = int(config["main"]['gain_energie_par_poisson'])
 
 
-####################################################################################
-
-
 # création d'une fonction qui créée la liste d'animaux
 
 def creer_animaux(largeur : int, hauteur : int) -> list :
@@ -85,8 +82,6 @@ def creer_animaux(largeur : int, hauteur : int) -> list :
         cases_vides.remove((x, y)) # Retirer la case occupée
     return liste_animaux
 
-
-####################################################################################
 
 # Création de la planète
 aqualand = Planete(largeur, hauteur) # Initialisation de l'environnement

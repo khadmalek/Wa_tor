@@ -9,10 +9,6 @@ la simulation de la planète. Il utilise également le module `itertools` pour f
 la manipulation des coordonnées et des itérations dans la grille de la planète.
 """
 
-
-
-################################################################################################
-
 class Planete : 
 
     """Représente une planète avec une grille pour afficher des entités.
@@ -89,9 +85,6 @@ class Planete :
                 print(e, end="|")
             print()
             print(separateur)
-
-            
-################################################################################################
 
 
 def afficher_chiffres(list_entites : list["Poisson", "Requin"]) : 
