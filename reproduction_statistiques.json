@@ -1,0 +1,189 @@
+{
+    "chronons": [
+        {
+            "chronon": 0,
+            "poissons_nes": 0,
+            "requin_nes": 0
+        },
+        {
+            "chronon": 10,
+            "poissons_nes": 0,
+            "requin_nes": 0
+        },
+        {
+            "chronon": 20,
+            "poissons_nes": 0,
+            "requin_nes": 0
+        },
+        {
+            "chronon": 30,
+            "poissons_nes": 125,
+            "requin_nes": 0
+        },
+        {
+            "chronon": 40,
+            "poissons_nes": 1,
+            "requin_nes": 9
+        },
+        {
+            "chronon": 50,
+            "poissons_nes": 0,
+            "requin_nes": 12
+        },
+        {
+            "chronon": 60,
+            "poissons_nes": 107,
+            "requin_nes": 5
+        },
+        {
+            "chronon": 70,
+            "poissons_nes": 95,
+            "requin_nes": 4
+        },
+        {
+            "chronon": 80,
+            "poissons_nes": 7,
+            "requin_nes": 2
+        },
+        {
+            "chronon": 90,
+            "poissons_nes": 76,
+            "requin_nes": 3
+        },
+        {
+            "chronon": 100,
+            "poissons_nes": 133,
+            "requin_nes": 13
+        },
+        {
+            "chronon": 110,
+            "poissons_nes": 69,
+            "requin_nes": 12
+        },
+        {
+            "chronon": 120,
+            "poissons_nes": 58,
+            "requin_nes": 6
+        },
+        {
+            "chronon": 130,
+            "poissons_nes": 97,
+            "requin_nes": 6
+        },
+        {
+            "chronon": 140,
+            "poissons_nes": 96,
+            "requin_nes": 4
+        },
+        {
+            "chronon": 150,
+            "poissons_nes": 67,
+            "requin_nes": 16
+        },
+        {
+            "chronon": 160,
+            "poissons_nes": 74,
+            "requin_nes": 11
+        },
+        {
+            "chronon": 170,
+            "poissons_nes": 76,
+            "requin_nes": 11
+        },
+        {
+            "chronon": 180,
+            "poissons_nes": 77,
+            "requin_nes": 20
+        },
+        {
+            "chronon": 190,
+            "poissons_nes": 71,
+            "requin_nes": 13
+        },
+        {
+            "chronon": 200,
+            "poissons_nes": 73,
+            "requin_nes": 19
+        },
+        {
+            "chronon": 210,
+            "poissons_nes": 85,
+            "requin_nes": 17
+        },
+        {
+            "chronon": 220,
+            "poissons_nes": 66,
+            "requin_nes": 21
+        },
+        {
+            "chronon": 230,
+            "poissons_nes": 64,
+            "requin_nes": 23
+        },
+        {
+            "chronon": 240,
+            "poissons_nes": 76,
+            "requin_nes": 22
+        },
+        {
+            "chronon": 250,
+            "poissons_nes": 50,
+            "requin_nes": 33
+        },
+        {
+            "chronon": 260,
+            "poissons_nes": 59,
+            "requin_nes": 26
+        },
+        {
+            "chronon": 270,
+            "poissons_nes": 43,
+            "requin_nes": 24
+        },
+        {
+            "chronon": 280,
+            "poissons_nes": 26,
+            "requin_nes": 27
+        },
+        {
+            "chronon": 290,
+            "poissons_nes": 27,
+            "requin_nes": 18
+        },
+        {
+            "chronon": 300,
+            "poissons_nes": 21,
+            "requin_nes": 24
+        },
+        {
+            "chronon": 310,
+            "poissons_nes": 16,
+            "requin_nes": 20
+        },
+        {
+            "chronon": 320,
+            "poissons_nes": 11,
+            "requin_nes": 23
+        },
+        {
+            "chronon": 330,
+            "poissons_nes": 12,
+            "requin_nes": 9
+        },
+        {
+            "chronon": 340,
+            "poissons_nes": 14,
+            "requin_nes": 7
+        },
+        {
+            "chronon": 350,
+            "poissons_nes": 14,
+            "requin_nes": 5
+        },
+        {
+            "chronon": 360,
+            "poissons_nes": 12,
+            "requin_nes": 5
+        }
+    ]
+}
