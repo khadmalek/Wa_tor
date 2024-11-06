@@ -7,6 +7,7 @@ import os
 import time
 import configparser
 from Chronometre import Chronometre
+import json
 
 """Module principal de la simulation.
 
@@ -45,6 +46,10 @@ temps_de_reproduction_poisson = int(config["main"]['temps_de_reproduction_poisso
 temps_de_reproduction_requin = int(config["main"]['temps_de_reproduction_requin'])
 gain_energie_par_poisson = int(config["main"]['gain_energie_par_poisson'])
 
+# Dictionnaire pour les statistiques de reproduction
+statistiques_reproduction = {
+    "chronons": []
+}
 
 # création d'une fonction qui créée la liste d'animaux
 
@@ -112,7 +117,21 @@ while True:
                     requin_nes += 1 # Incrémente le compteur de requins nés
                 if animal.mourir(liste_animaux) : # Vérifie si le requin meurt
                     requins_morts += 1  # Incrémente le compteur de requins morts
-        
+
+
+         # Ajouter les données de reproduction au dictionnaire
+        statistiques_reproduction["chronons"].append({
+            "chronon": chronon,
+            "poissons_nes": poissons_nes,
+            "requin_nes": requin_nes,
+        })
+
+        # Sauvegarder les statistiques dans le fichier JSON
+        with open("reproduction_statistiques.json", "w") as f:
+            json.dump(statistiques_reproduction, f, indent=4)
+
+
+
         # Afficher la grille et les statistiques
         os.system("clear") # Efface l'écran
         aqualand.affichage_grille(liste_animaux) # Affiche la grille des animaux
