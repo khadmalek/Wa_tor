@@ -3,3 +3,5 @@ TODO.txt
 __pycache__
 test.py
 requirements.txt
+.DS_Store
+ui.py
