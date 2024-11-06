@@ -1,5 +1,4 @@
 import pygame
-import configparser
 from Poisson import Poisson
 from Requin import Requin
 from Planete import Planete
@@ -7,17 +6,10 @@ from Chronometre import Chronometre
 from main import creer_animaux
 
 # Paramètres de la simulation
-
-config = configparser.ConfigParser()
-config.read('parametre.ini')
-
-
-# Lecture des paramètres de configuration
-largeur = int(config["main"]['largeur'])
-hauteur = int(config["main"]['hauteur'])
-taille_cellule = 20
-
 pygame.init()
+largeur = 30
+hauteur = 30
+taille_cellule = 20
 
 largeur_fenetre = largeur * taille_cellule
 hauteur_fenetre = hauteur * taille_cellule
@@ -60,3 +52,28 @@ while running:
                         requin_nes += 1 # Incrémente le compteur de requins nés
                     if animal.mourir(liste_animaux) : # Vérifie si le requin meurt
                         requins_morts += 1  # Incrémente le compteur de requins morts
+
+            # Affichage de la simulation
+            fenetre.fill((255, 255, 255))  # Remplir la fenêtre avec un fond blanc
+            aqualand.affichage_grille(liste_animaux, fenetre, taille_cellule)  # Afficher la grille avec les animaux
+
+            # Afficher les statistiques
+            font = pygame.font.Font(None, 36)
+            temps = chrono.afficher_temps()
+            stats_text = font.render(f"{temps} - Poissons: {len([x for x in liste_animaux if isinstance(x, Poisson)])}, Requins: {len([x for x in liste_animaux if isinstance(x, Requin)])}", True, (0, 0, 0))
+            fenetre.blit(stats_text, (10, 10))
+
+            pygame.display.flip()  # Mettre à jour l'affichage
+
+
+            # Pause pour ralentir la simulation
+            pygame.time.wait(300)
+
+            chronon += 1  # Incrémenter le chronomètre
+
+            
+            clock.tick(30)  # Limiter la vitesse du jeu à 30 FPS
+
+    pygame.display.update()
+
+pygame.quit()  # Quitter Pygame
