@@ -136,7 +136,7 @@ class Requin(Poisson):
         Cette méthode vérifie si le requin a atteint le nombre requis de chronons de reproduction et s'il a changé d'emplacement. Si ces conditions sont remplies, un nouveau requin est créé à l'ancienne position et ajouté à la liste des animaux, et le compteur de reproduction est réinitialisé.
 
         Args:
-        liste_animaux (list): La liste des animaux présents dans l'environnement.
+            liste_animaux (list): La liste des animaux présents dans l'environnement.
         """
         # Vérifie les conditions de reproduction
         if self.chronons_reproduction >= self.temps_reproduction_requin and [self.emplacement_x, self.emplacement_y] != self.ancien_emplacement :
