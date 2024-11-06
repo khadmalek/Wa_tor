@@ -140,10 +140,3 @@ if __name__ == "__main__" :
     planete1.affichage_grille(l1)
     # Affichage du nombre de poissons et de requins
     afficher_chiffres(l1)
-
-
-
-
-
-
-
