@@ -21,7 +21,7 @@ class Planete :
         __hauteur (int): La hauteur de la grille de la planète.
     """
 
-    def __init__(self, largeur : int, hauteur : int):
+    def __init__(self, largeur : int, hauteur : int) -> None:
 
         """Initialise une instance de la classe Planete.
 
@@ -77,17 +77,18 @@ class Planete :
         
         
         # Affichage de la grille
-        separateur = "--" + "-" * (self.__largeur * 4 + (self.__largeur - 1))
-        print(separateur)
+        separateur = "-" + "-" * (self.__largeur * 5)
+        # separateur = "--" + "-" * (self.__largeur * 4 + (self.__largeur - 1))
+        print(" "+separateur)
         for ligne in grille_a_afficher :
-            print("|", end="")
+            print(" |", end="")
             for e in ligne : 
                 print(e, end="|")
             print()
-            print(separateur)
+            print(" "+separateur)
 
 
-def afficher_chiffres(list_entites : list["Poisson", "Requin"]) : 
+def afficher_chiffres(list_entites : list["Poisson", "Requin"]) -> None : 
 
     """Affiche le nombre d'entités présentes dans la liste.
 
@@ -109,25 +110,6 @@ def afficher_chiffres(list_entites : list["Poisson", "Requin"]) :
     nombre_requins = len([e for e in list_entites if isinstance(e, Requin)])
     # Affiche le nombre de poissons et de requins
     print(f"Nombre de poissons : {nombre_poissons} \nNombre de requins : {nombre_requins} ")
-
-
-def statistiques() :
-
-    """Affiche le nombre d'entités présentes dans la liste.
-
-    Cette méthode compte et affiche le nombre de poissons et de requins dans la liste 
-    fournie. Elle distingue les poissons des requins et affiche les résultats de manière 
-    lisible.
-
-    Args:
-        list_entites (list): Une liste d'entités comprenant des objets de type "Poisson" 
-        et "Requin".
-
-    Returns:
-        None
-    """ 
-    
-    pass
 
 
 if __name__ == "__main__" :
