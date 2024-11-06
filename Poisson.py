@@ -22,7 +22,7 @@ class Poisson:
         ancien_emplacement (list): La dernière position du poisson avant son déplacement.
     """
 
-    def __init__(self, x, y, temps_reproduction_poisson):
+    def __init__(self, x : int, y : int, temps_reproduction_poisson : int) -> None:
 
         """Initialise une instance de la classe Poisson.
 
@@ -42,7 +42,7 @@ class Poisson:
         self.temps_reproduction = 0  # Temps écoulé depuis la dernière reproduction
         self.ancien_emplacement = [self.emplacement_x, self.emplacement_y]  # Dernière position avant déplacement
 
-    def cases_voisines(self, largeur, hauteur) -> list[tuple]:
+    def cases_voisines(self, largeur : int, hauteur : int) -> list[tuple]:
 
         """Renvoie les coordonnées des cases voisines du poisson.
 
@@ -65,7 +65,7 @@ class Poisson:
         ]
 
 
-    def deplacement(self, liste_animaux : list["Poisson"], largeur, hauteur) -> None :
+    def deplacement(self, liste_animaux : list["Poisson"], largeur : int, hauteur : int) -> None :
 
         """Déplace le poisson vers une case voisine.
 
@@ -149,7 +149,7 @@ class Poisson:
 
 
 # autres Fonction
-def mouvement_thoroidal(coord, longueur):
+def mouvement_thoroidal(coord : int, longueur : int) -> int:
 
     """Applique un mouvement toroidal à une coordonnée.
 

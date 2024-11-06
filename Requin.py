@@ -25,7 +25,7 @@ class Requin(Poisson):
     """
 
     
-    def __init__(self, x: int, y: int, temps_reproduction_requin: int, energie: int):
+    def __init__(self, x: int, y: int, temps_reproduction_requin: int, energie: int) -> None :
         """
         Initialise une instance de Requin avec sa position, son temps de reproduction et son niveau d'énergie.
 

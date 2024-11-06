@@ -53,7 +53,7 @@ statistiques_reproduction = {
 
 # création d'une fonction qui créée la liste d'animaux
 
-def creer_animaux(largeur : int, hauteur : int) -> list :
+def creer_animaux(largeur : int, hauteur : int) -> list["Poisson", "Requin"] :
 
     """Crée une liste d'animaux dans une grille donnée.
 
