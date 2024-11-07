@@ -1,2 +1,6 @@
 .venv
 TODO.txt
+__pycache__
+test.py
+.DS_Store
+ui.py
