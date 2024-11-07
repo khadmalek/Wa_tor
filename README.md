@@ -25,10 +25,12 @@ Le projet nécessite Python3 et utilise les modules suivants :
 - `json` : pour enregistrer les statistiques de reproduction dans un fichier.
 - `matplotlib.pyplot` : pour afficher des graphiques de statistiques (optionnel).
 
+Avant d’installer le programme, assurez-vous d’installer les bibliothèques nécessaires:
+
 
 
 ```bash
-pip install configparser matplotlib
+pip install -r requirements.txt
 ```
 
 ## FLOWCHART
@@ -95,6 +97,15 @@ python3 generer_graphique.py
 
 
 ![Description de l'image](./graph.png)
+
+## Documentation
+
+[Guide JSON en Python - W3Schools](https://www.w3schools.com/python/python_json.asp)
+
+[Matplotlib : Tout savoir - DataScientest](https://datascientest.com/matplotlib-tout-savoir)
+
+https://openclassrooms.com/fr/courses/7150616-apprenez-la-programmation-orientee-objet-avec-python
+
 
 ## Auteur 
 
